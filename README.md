@@ -57,12 +57,14 @@ https://<你的用户名>.github.io/<仓库名>/
 
 ## 自定义内容
 
-路线、项目和方向数据全部位于 `app.js`：
+路线、项目和方向数据位于 `app.js`，推荐资源位于 `resources.js`：
 
 - `phases`：学习阶段
 - `projects`：作品集项目
 - `directions`：进阶方向
 - `checklist`：最终能力清单
+- `phaseResources`：每个阶段的书目、视频和博主
+- `directionResources`：各进阶方向的补充资源
 
 修改数组内容即可更新页面，不需要改 HTML 结构。
 
@@ -78,6 +80,7 @@ embedded-learning-roadmap/
 ├── index.html
 ├── styles.css
 ├── app.js
+├── resources.js
 ├── README.md
 ├── LICENSE
 └── .gitignore
@@ -94,3 +97,15 @@ embedded-learning-roadmap/
 ## License
 
 MIT
+
+
+## 学习资源
+
+每个学习阶段均内置可折叠的资源面板，包含：
+
+- 推荐书目与阅读重点
+- 官方课程、公开视频与中文教程
+- 值得长期关注的博主、社区和官方文档
+- Linux、物联网、汽车电子、机器人与低功耗方向资源
+
+资源数据集中在 `resources.js`，可直接添加、删除或修改链接。

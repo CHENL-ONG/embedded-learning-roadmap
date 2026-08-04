@@ -64,6 +64,10 @@ const phases = [
   }
 ];
 
+phases.forEach(phase => {
+  phase.resources = window.phaseResources?.[phase.id] || { books: [], videos: [], creators: [] };
+});
+
 const projects = [
   { symbol: '◉', title: '多传感器数据采集终端', description: '路线中的第一个完整 MCU 项目：传感器采集、OLED 显示、串口命令、参数保存与异常日志。', tech: ['STM32', 'I²C', 'ADC', 'DMA', 'OLED'], outcome: '目标：证明你能独立完成裸机项目' },
   { symbol: '≋', title: 'FreeRTOS 多任务终端', description: '把裸机程序升级为多任务系统，处理任务通信、资源竞争、监控与故障恢复。', tech: ['FreeRTOS', 'Queue', 'Mutex'], outcome: '目标：建立实时系统思维' },
@@ -121,6 +125,7 @@ function renderPhases() {
     });
 
     node.querySelector('.phase-project').innerHTML = `<strong>阶段项目</strong><br>${phase.project}`;
+    renderPhaseResources(node.querySelector('.resource-groups'), phase.resources);
     const taskList = node.querySelector('.task-list');
     phase.tasks.forEach((task, taskIndex) => {
       const key = `${phase.id}-task-${taskIndex}`;
@@ -136,6 +141,61 @@ function renderPhases() {
       taskList.appendChild(label);
     });
     grid.appendChild(node);
+  });
+}
+
+
+function renderPhaseResources(container, resources) {
+  const sections = [
+    ['books', '推荐书目', '▤'],
+    ['videos', '视频 / 课程', '▶'],
+    ['creators', '博主 / 社区', '◎']
+  ];
+
+  sections.forEach(([key, label, icon]) => {
+    const items = resources?.[key] || [];
+    if (!items.length) return;
+
+    const group = document.createElement('section');
+    group.className = 'resource-group';
+    const heading = document.createElement('h4');
+    heading.innerHTML = `<span>${icon}</span>${label}`;
+    group.appendChild(heading);
+
+    const list = document.createElement('div');
+    list.className = 'resource-list';
+    items.forEach(item => {
+      const element = item.url ? document.createElement('a') : document.createElement('div');
+      element.className = 'resource-item';
+      if (item.url) {
+        element.href = item.url;
+        element.target = '_blank';
+        element.rel = 'noreferrer';
+        element.setAttribute('aria-label', `${item.title}（新窗口打开）`);
+      }
+      const title = document.createElement('strong');
+      title.textContent = item.title;
+      element.appendChild(title);
+      if (item.author) {
+        const author = document.createElement('span');
+        author.textContent = item.author;
+        element.appendChild(author);
+      }
+      if (item.note) {
+        const note = document.createElement('p');
+        note.textContent = item.note;
+        element.appendChild(note);
+      }
+      if (item.url) {
+        const arrow = document.createElement('i');
+        arrow.textContent = '↗';
+        arrow.setAttribute('aria-hidden', 'true');
+        element.appendChild(arrow);
+      }
+      list.appendChild(element);
+    });
+    group.appendChild(list);
+    container.appendChild(group);
   });
 }
 
@@ -163,11 +223,17 @@ function renderDirections() {
   directions.forEach(direction => {
     const article = document.createElement('article');
     article.className = 'direction-card';
+    const resources = window.directionResources?.[direction.title] || [];
     article.innerHTML = `
       <div class="direction-icon">${direction.icon}</div>
       <h3>${direction.title}</h3>
       <p>${direction.desc}</p>
       <ul>${direction.items.map(item => `<li>${item}</li>`).join('')}</ul>
+      ${resources.length ? `
+        <details class="direction-resource-panel">
+          <summary>方向资源 <span>↗</span></summary>
+          <div>${resources.map(item => `<a href="${item.url}" target="_blank" rel="noreferrer">${item.title}</a>`).join('')}</div>
+        </details>` : ''}
     `;
     grid.appendChild(article);
   });
