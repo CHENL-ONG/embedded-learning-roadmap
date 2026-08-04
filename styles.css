@@ -400,3 +400,537 @@ a.resource-item:hover {
   font-size: .68rem;
 }
 .direction-resource-panel a:hover { color: var(--text); }
+
+/* Personal editing and local-data features */
+.data-button,
+.mini-button,
+.panel-add-button,
+.icon-text-button,
+.text-action,
+.danger-button {
+  border: 1px solid var(--line);
+  background: var(--panel-2);
+  color: var(--text);
+  cursor: pointer;
+  transition: transform .18s ease, border-color .18s ease, background .18s ease;
+}
+
+.data-button {
+  min-height: 40px;
+  padding: 0 13px;
+  border-radius: 11px;
+  font-size: .82rem;
+  font-weight: 750;
+}
+
+.data-button:hover,
+.mini-button:hover,
+.panel-add-button:hover,
+.icon-text-button:hover,
+.text-action:hover {
+  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 48%, var(--line));
+}
+
+.personal-plan {
+  margin-top: 16px;
+  padding: 14px;
+  border: 1px solid color-mix(in srgb, var(--accent-2) 24%, var(--line));
+  border-radius: 14px;
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--accent-2) 7%, transparent), transparent 65%),
+    color-mix(in srgb, var(--panel-2) 75%, transparent);
+}
+
+.personal-plan-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.personal-plan-heading > div {
+  min-width: 0;
+}
+
+.personal-plan-heading span,
+.personal-plan-heading strong {
+  display: block;
+}
+
+.personal-plan-heading span {
+  color: var(--accent-2);
+  font-size: .62rem;
+  font-weight: 850;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.personal-plan-heading strong {
+  margin-top: 2px;
+  overflow-wrap: anywhere;
+  font-size: .8rem;
+  line-height: 1.45;
+}
+
+.mini-button {
+  flex: 0 0 auto;
+  min-height: 30px;
+  padding: 0 9px;
+  border-radius: 9px;
+  font-size: .68rem;
+  font-weight: 800;
+}
+
+.plan-empty,
+.empty-state {
+  margin: 9px 0 0;
+  color: var(--muted);
+  font-size: .68rem;
+  line-height: 1.6;
+}
+
+.empty-state.compact {
+  margin: 0;
+  padding: 9px 10px;
+  border: 1px dashed var(--line);
+  border-radius: 9px;
+}
+
+.plan-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 10px;
+}
+
+.plan-meta span {
+  padding: 4px 7px;
+  border-radius: 7px;
+  background: var(--panel-solid);
+  color: var(--muted);
+  font-size: .63rem;
+}
+
+.plan-block {
+  margin-top: 10px;
+  padding-top: 9px;
+  border-top: 1px solid var(--line);
+}
+
+.plan-block b {
+  color: var(--text);
+  font-size: .66rem;
+}
+
+.plan-block p {
+  margin: 3px 0 0;
+  color: var(--muted);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  font-size: .67rem;
+  line-height: 1.65;
+}
+
+.task-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 17px;
+}
+
+.task-heading strong {
+  font-size: .75rem;
+}
+
+.task-list {
+  margin-top: 10px;
+}
+
+.task-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  min-width: 0;
+}
+
+.task-row .task-item {
+  flex: 1;
+  min-width: 0;
+  margin: 0;
+}
+
+.task-row .task-item span {
+  overflow-wrap: anywhere;
+}
+
+.task-row.done .task-item span {
+  text-decoration: line-through;
+  opacity: .6;
+}
+
+.custom-task {
+  padding: 8px 9px;
+  border: 1px dashed color-mix(in srgb, var(--accent) 30%, var(--line));
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+.inline-actions {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 4px;
+}
+
+.icon-text-button {
+  width: 25px;
+  height: 25px;
+  display: grid;
+  place-items: center;
+  padding: 0;
+  border-radius: 7px;
+  font-size: .72rem;
+}
+
+.icon-text-button.danger,
+.text-action.danger,
+.danger-button,
+.danger-zone {
+  color: var(--danger);
+}
+
+.panel-add-button {
+  width: calc(100% - 24px);
+  min-height: 36px;
+  margin: 0 12px 13px;
+  border-style: dashed;
+  border-radius: 10px;
+  color: var(--accent);
+  font-size: .69rem;
+  font-weight: 800;
+}
+
+.resource-group h4 small {
+  margin-left: auto;
+  color: var(--muted);
+  font-size: .58rem;
+  font-weight: 600;
+}
+
+.resource-item {
+  padding: 0;
+  overflow: hidden;
+}
+
+.resource-content {
+  position: relative;
+  display: block;
+  padding: 10px 30px 10px 10px;
+}
+
+a.resource-content:hover {
+  background: color-mix(in srgb, var(--accent) 4%, transparent);
+}
+
+.resource-content strong,
+.resource-content span,
+.resource-content p {
+  display: block;
+}
+
+.resource-content strong {
+  font-size: .72rem;
+  line-height: 1.4;
+}
+
+.resource-content span {
+  margin-top: 2px;
+  color: var(--accent-2);
+  font-size: .62rem;
+}
+
+.resource-content p {
+  margin: 5px 0 0;
+  color: var(--muted);
+  font-size: .65rem;
+  line-height: 1.55;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+.resource-content i {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  color: var(--accent);
+  font-style: normal;
+}
+
+.custom-resource {
+  border-style: dashed;
+  border-color: color-mix(in srgb, var(--accent) 34%, var(--line));
+}
+
+.resource-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 5px;
+  padding: 6px 8px;
+  border-top: 1px solid var(--line);
+  background: color-mix(in srgb, var(--panel-2) 75%, transparent);
+}
+
+.text-action {
+  padding: 3px 7px;
+  border-radius: 7px;
+  font-size: .6rem;
+  font-weight: 750;
+}
+
+.editor-dialog {
+  width: min(720px, calc(100% - 28px));
+  max-height: min(88vh, 900px);
+  padding: 0;
+  overflow: auto;
+  color: var(--text);
+  border: 1px solid var(--line);
+  border-radius: 22px;
+  background: var(--panel-solid);
+  box-shadow: 0 34px 110px rgba(0, 0, 0, .52);
+}
+
+.editor-dialog.small-dialog {
+  width: min(560px, calc(100% - 28px));
+}
+
+.editor-dialog::backdrop {
+  background: rgba(2, 8, 16, .72);
+  backdrop-filter: blur(8px);
+}
+
+.editor-form {
+  padding: 24px;
+}
+
+.dialog-heading {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 18px;
+  margin-bottom: 22px;
+}
+
+.dialog-heading h3 {
+  margin: 2px 0 0;
+  font-size: 1.35rem;
+  line-height: 1.25;
+}
+
+.dialog-eyebrow {
+  color: var(--accent);
+  font-size: .64rem;
+  font-weight: 850;
+  letter-spacing: .14em;
+}
+
+.dialog-close {
+  width: 38px;
+  height: 38px;
+  display: grid;
+  place-items: center;
+  flex: 0 0 auto;
+  padding: 0;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  background: var(--panel-2);
+  color: var(--muted);
+  cursor: pointer;
+  font-size: 1.3rem;
+}
+
+.dialog-close:hover {
+  color: var(--text);
+  border-color: color-mix(in srgb, var(--accent) 45%, var(--line));
+}
+
+.form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 13px;
+}
+
+#resourceForm .form-grid {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.form-field {
+  display: grid;
+  gap: 7px;
+  margin-bottom: 14px;
+}
+
+.form-field.full {
+  width: 100%;
+}
+
+.form-field > span {
+  color: var(--muted);
+  font-size: .72rem;
+  font-weight: 700;
+}
+
+.form-field input,
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  min-width: 0;
+  border: 1px solid var(--line);
+  border-radius: 11px;
+  outline: none;
+  background: var(--panel-2);
+  color: var(--text);
+  font: inherit;
+  font-size: .82rem;
+}
+
+.form-field input,
+.form-field select {
+  min-height: 44px;
+  padding: 0 12px;
+}
+
+.form-field textarea {
+  padding: 11px 12px;
+  resize: vertical;
+  line-height: 1.65;
+}
+
+.form-field input:focus,
+.form-field textarea:focus,
+.form-field select:focus {
+  border-color: color-mix(in srgb, var(--accent) 62%, var(--line));
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent) 10%, transparent);
+}
+
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: color-mix(in srgb, var(--muted) 72%, transparent);
+}
+
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 9px;
+  margin-top: 8px;
+  padding-top: 18px;
+  border-top: 1px solid var(--line);
+}
+
+.dialog-actions.split-actions {
+  justify-content: space-between;
+}
+
+.dialog-actions.split-actions > div {
+  display: flex;
+  gap: 9px;
+}
+
+.compact-button {
+  min-height: 42px;
+  padding-inline: 16px;
+  border-radius: 11px;
+  font-size: .78rem;
+}
+
+.danger-button {
+  min-height: 42px;
+  padding: 0 14px;
+  border-radius: 11px;
+  font-size: .76rem;
+  font-weight: 800;
+}
+
+.danger-button:hover {
+  border-color: color-mix(in srgb, var(--danger) 55%, var(--line));
+  background: color-mix(in srgb, var(--danger) 8%, var(--panel-2));
+}
+
+.dialog-note {
+  margin: -5px 0 18px;
+  color: var(--muted);
+  font-size: .78rem;
+}
+
+.data-action-list {
+  display: grid;
+  gap: 10px;
+}
+
+.data-action-list button {
+  display: grid;
+  gap: 2px;
+  padding: 14px 15px;
+  text-align: left;
+  border: 1px solid var(--line);
+  border-radius: 13px;
+  background: var(--panel-2);
+  color: var(--text);
+  cursor: pointer;
+}
+
+.data-action-list button:hover {
+  border-color: color-mix(in srgb, var(--accent) 40%, var(--line));
+}
+
+.data-action-list button strong {
+  font-size: .8rem;
+}
+
+.data-action-list button span {
+  color: var(--muted);
+  font-size: .68rem;
+}
+
+.data-action-list button.danger-zone:hover {
+  border-color: color-mix(in srgb, var(--danger) 50%, var(--line));
+  background: color-mix(in srgb, var(--danger) 7%, var(--panel-2));
+}
+
+@media (max-width: 680px) {
+  .header-actions {
+    gap: 5px;
+  }
+
+  .data-button {
+    padding-inline: 9px;
+    font-size: .72rem;
+  }
+
+  .editor-form {
+    padding: 19px;
+  }
+
+  .form-grid,
+  #resourceForm .form-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+
+  .dialog-actions,
+  .dialog-actions.split-actions {
+    align-items: stretch;
+    flex-direction: column-reverse;
+  }
+
+  .dialog-actions.split-actions > div {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .dialog-actions > button,
+  .dialog-actions.split-actions > button {
+    width: 100%;
+  }
+}

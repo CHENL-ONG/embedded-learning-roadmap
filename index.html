@@ -29,6 +29,7 @@
     </nav>
 
     <div class="header-actions">
+      <button class="data-button" id="dataManagerButton" type="button" title="备份、导入或清理个人数据">我的数据</button>
       <button class="icon-button" id="themeToggle" type="button" aria-label="切换明暗主题" title="切换主题">
         <span class="theme-icon">☾</span>
       </button>
@@ -43,7 +44,7 @@
         <h1>把零散知识，连成一条<br /><span>可执行的嵌入式成长路径</span></h1>
         <p class="hero-description">
           从 C 语言、电路基础与 STM32 裸机开发开始，逐步进入 FreeRTOS、通信协议、Bootloader 与综合项目。
-          每一阶段都有明确产出，不再只“看懂”，而是能真正做出来。
+          每一阶段都有明确产出，并支持制定个人计划、添加任务、收藏课程和记录自己发现的博主。
         </p>
         <div class="hero-actions">
           <a class="primary-button" href="#roadmap">开始学习路线</a>
@@ -158,13 +159,86 @@
       <p class="phase-summary"></p>
       <ul class="topic-list"></ul>
       <div class="phase-project"></div>
+      <section class="personal-plan"></section>
       <details class="resource-panel">
-        <summary><span>推荐学习资源</span><small>书目 · 视频 · 博主</small></summary>
+        <summary><span>推荐学习资源</span><small>书目 · 视频 · 博主 · 自定义</small></summary>
         <div class="resource-groups"></div>
+        <button class="add-resource-button panel-add-button" type="button">＋ 添加学习内容或博主</button>
       </details>
+      <div class="task-heading">
+        <strong>阶段任务</strong>
+        <button class="add-task-button mini-button" type="button">＋ 添加任务</button>
+      </div>
       <div class="task-list"></div>
     </article>
   </template>
+
+
+  <dialog class="editor-dialog" id="planDialog">
+    <form id="planForm" class="editor-form">
+      <div class="dialog-heading">
+        <div><span class="dialog-eyebrow">PERSONAL PLAN</span><h3 id="planDialogTitle">我的学习计划</h3></div>
+        <button type="button" class="dialog-close" data-close-dialog aria-label="关闭">×</button>
+      </div>
+      <label class="form-field full"><span>阶段目标</span><input id="planGoal" maxlength="100" placeholder="例如：能独立完成 UART + DMA 数据接收" /></label>
+      <div class="form-grid">
+        <label class="form-field"><span>开始日期</span><input id="planStartDate" type="date" /></label>
+        <label class="form-field"><span>目标完成日期</span><input id="planEndDate" type="date" /></label>
+        <label class="form-field"><span>每周投入时间</span><input id="planWeeklyHours" type="number" min="1" max="80" step="1" placeholder="10" /></label>
+      </div>
+      <label class="form-field full"><span>执行计划</span><textarea id="planWeeklyPlan" rows="5" maxlength="1200" placeholder="例如：周一看课程；周三完成实验；周末整理笔记和提交 Git。"></textarea></label>
+      <label class="form-field full"><span>学习笔记 / 提醒</span><textarea id="planNotes" rows="4" maxlength="1200" placeholder="记录难点、依赖条件、需要购买的器件等。"></textarea></label>
+      <div class="dialog-actions split-actions">
+        <button id="clearPlanButton" class="danger-button" type="button">清空计划</button>
+        <div><button class="secondary-button compact-button" type="button" data-close-dialog>取消</button><button class="primary-button compact-button" type="submit">保存计划</button></div>
+      </div>
+    </form>
+  </dialog>
+
+  <dialog class="editor-dialog" id="resourceDialog">
+    <form id="resourceForm" class="editor-form">
+      <div class="dialog-heading">
+        <div><span class="dialog-eyebrow">CUSTOM RESOURCE</span><h3 id="resourceDialogTitle">添加学习资源</h3></div>
+        <button type="button" class="dialog-close" data-close-dialog aria-label="关闭">×</button>
+      </div>
+      <div class="form-grid">
+        <label class="form-field"><span>资源类型</span><select id="resourceType"><option value="content">学习内容 / 文章</option><option value="books">书目</option><option value="videos">视频 / 课程</option><option value="creators">博主 / 社区</option></select></label>
+        <label class="form-field"><span>作者 / 平台</span><input id="resourceAuthor" maxlength="100" placeholder="作者、UP 主或网站名称" /></label>
+      </div>
+      <label class="form-field full"><span>名称</span><input id="resourceTitle" maxlength="160" required placeholder="例如：正点原子 STM32 教程" /></label>
+      <label class="form-field full"><span>链接（可选）</span><input id="resourceUrl" type="text" inputmode="url" maxlength="500" placeholder="https://..." /></label>
+      <label class="form-field full"><span>推荐理由 / 学习重点</span><textarea id="resourceNote" rows="4" maxlength="800" placeholder="记录为什么值得学习，以及建议看哪些章节。"></textarea></label>
+      <div class="dialog-actions"><button class="secondary-button compact-button" type="button" data-close-dialog>取消</button><button class="primary-button compact-button" type="submit">保存资源</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="editor-dialog small-dialog" id="taskDialog">
+    <form id="taskForm" class="editor-form">
+      <div class="dialog-heading">
+        <div><span class="dialog-eyebrow">CUSTOM TASK</span><h3 id="taskDialogTitle">添加学习任务</h3></div>
+        <button type="button" class="dialog-close" data-close-dialog aria-label="关闭">×</button>
+      </div>
+      <label class="form-field full"><span>任务内容</span><textarea id="taskText" rows="4" maxlength="300" required placeholder="例如：使用逻辑分析仪抓取一组 I²C 波形并写排错记录。"></textarea></label>
+      <div class="dialog-actions"><button class="secondary-button compact-button" type="button" data-close-dialog>取消</button><button class="primary-button compact-button" type="submit">保存任务</button></div>
+    </form>
+  </dialog>
+
+  <dialog class="editor-dialog small-dialog" id="dataDialog">
+    <section class="editor-form">
+      <div class="dialog-heading">
+        <div><span class="dialog-eyebrow">LOCAL DATA</span><h3>管理个人学习数据</h3></div>
+        <button type="button" class="dialog-close" data-close-dialog aria-label="关闭">×</button>
+      </div>
+      <p class="dialog-note">计划、任务和自定义资源默认保存在当前浏览器。更换电脑或清理浏览器前，请先导出备份。</p>
+      <div class="data-action-list">
+        <button id="exportDataButton" type="button"><strong>导出 JSON 备份</strong><span>保存进度、个人计划、任务和资源</span></button>
+        <button id="importDataButton" type="button"><strong>导入 JSON 备份</strong><span>从之前导出的文件恢复数据</span></button>
+        <button id="clearPersonalDataButton" class="danger-zone" type="button"><strong>清除个人内容</strong><span>删除计划、自定义任务和自定义资源</span></button>
+      </div>
+      <input id="importDataFile" type="file" accept="application/json,.json" hidden />
+      <div class="dialog-actions"><button class="secondary-button compact-button" type="button" data-close-dialog>关闭</button></div>
+    </section>
+  </dialog>
 
   <script src="resources.js" defer></script>
   <script src="app.js" defer></script>
